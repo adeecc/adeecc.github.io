@@ -14,7 +14,7 @@ module.exports = {
         "Arial",
         "sans-serif",
       ],
-      mono: ["Menlo", "Monaco", "Courier New", "monospace"],
+      mono: ["Roboto Mono", "Menlo", "Monaco", "Courier New", "monospace"],
     },
     fontSize: {
       tiny: "0.625rem",
@@ -43,13 +43,13 @@ module.exports = {
         900: "var(--color-primary-900)",
       },
       secondary: {
-        DEFAULT: "var(--color-secondary)",
-        "washed-out": "var(--color-secondary-washed-out)",
+        100: "var(--color-secondary-washed-out)",
+        900: "var(--color-secondary)",
       },
       accent: {
-        DEFAULT: "var(--color-accent)",
-        hover: "var(--color-accent-hover)",
-        disabled: "var(--color-accent-disabled)",
+        900: "var(--color-accent)",
+        800: "var(--color-accent-hover)",
+        100: "var(--color-accent-disabled)",
       },
       black: "#000",
     },

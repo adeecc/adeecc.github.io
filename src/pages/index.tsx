@@ -1,11 +1,15 @@
-import React from "react";
+import React from 'react';
+import Container from '../components/Container';
+import Hero from '../sections/Hero';
 
 const Home: React.FC = () => {
-    return (
-        <>
-            <h1 className="text-primary-100">Hello World</h1>
-        </>
-    )
-}
+  return (
+    <>
+      <Container>
+        <Hero />
+      </Container>
+    </>
+  );
+};
 
 export default Home;
