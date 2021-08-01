@@ -8,7 +8,9 @@ interface Props {
 const Button: React.FC<Props> = ({ href, children }) => {
   return (
     <Link href={href}>
-      <a className='block flex-grow-0 py-2 px-6 border rounded-sm border-accent-900 text-accent-900'>{children}</a>
+      <a className='py-4 px-6 border rounded-sm border-accent-900 text-accent-900'>
+        {children}
+      </a>
     </Link>
   );
 };

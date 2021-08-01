@@ -22,7 +22,7 @@ const Hero: React.FC<Props> = () => {
 
           {/* Intro */}
           <div className='mt-9'>
-            <div className='text-primary-300'>
+            <div className='text-primary-300 max-w-prose'>
               <p>
                 I'm a Computer Science Undergrad from India in my 3rd year. I
                 dabble mostly with{' '}
@@ -35,7 +35,7 @@ const Hero: React.FC<Props> = () => {
                 Currently looking for internships in the fields of Software
                 Engineering and Data Science. If I happen to have started
                 blogging, you can find it{' '}
-                <Link href=''>
+                <Link href='#'>
                   <a className='text-accent-900 hover:text-accent-800'>here</a>
                 </Link>
               </p>
@@ -43,7 +43,7 @@ const Hero: React.FC<Props> = () => {
           </div>
 
           <div className='mt-9'>
-            <Button href='https://github.com/adeecc'>Hire Me!</Button>
+            <Button href='https://github.com/adeecc'>Get in touch!</Button>
           </div>
         </div>
       </div>
