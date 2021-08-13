@@ -85,31 +85,47 @@ const NavBar = () => {
           </nav>
 
           <Disclosure.Panel className='sm:hidden'>
-            <Transition show={open}>
-              {/* TODO: Change to: cubic-bezier(0.645, 0.045, 0.355, 1) */}
-              <Transition.Child
-                enter='transition ease-in-out duration-150 transform '
-                enterFrom='translate-x-full'
-                enterTo='translate-x-0'
-                leave='transition ease-in-out duration-150 transform'
-                leaveFrom='translate-x-0'
-                leaveTo='translate-x-full'
-              >
-                <div className='fixed inset-0 ml-24 bg-primary-800'>
-                  <div className='absolute inset-0 flex flex-col h-full justify-center items-center gap-y-10'>
-                    {navigation.map((item, index) => (
-                      <NavItem
-                        key={item.name}
-                        index={index}
-                        name={item.name}
-                        href={item.href}
-                      />
-                    ))}
-                    <Button href=''>Resume</Button>
+            {/* TODO: Change to: cubic-bezier(0.645, 0.045, 0.355, 1) */}
+            <Transition.Root show={open} as={Fragment}>
+              <div className='fixed inset-0 overflow-hidden'>
+                <Transition.Child
+                  as={Fragment}
+                  enter='ease-in-out duration-150'
+                  enterFrom='opacity-0'
+                  enterTo='opacity-100'
+                  leave='ease-in-out duration-150'
+                  leaveFrom='opacity-100'
+                  leaveTo='opacity-0'
+                >
+                  {/* Overloay */}
+                  <div className='absolute inset-0 bg-black bg-opacity-75 transition-opacity'></div>
+                </Transition.Child>
+
+                <Transition.Child
+                  as={Fragment}
+                  enter='transform transition ease-in-out duration-150'
+                  enterFrom='translate-x-full'
+                  enterTo='translate-x-0'
+                  leave='transform transition ease-in-out duration-150'
+                  leaveFrom='translate-x-0'
+                  leaveTo='translate-x-full'
+                >
+                  <div className='relative bg-primary-700 ml-24 h-full'>
+                    <div className='flex flex-col h-full gap-y-10 justify-center items-center'>
+                      {navigation.map((item: NavItem, index) => (
+                        <NavItem
+                          key={item.name}
+                          index={index}
+                          name={item.name}
+                          href={item.href}
+                        />
+                      ))}
+                      <Button href=''>Resume</Button>
+                    </div>
                   </div>
-                </div>
-              </Transition.Child>
-            </Transition>
+                </Transition.Child>
+              </div>
+            </Transition.Root>
           </Disclosure.Panel>
         </>
       )}
