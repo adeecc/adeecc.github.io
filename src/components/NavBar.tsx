@@ -1,14 +1,14 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Link from 'next/link';
-import { Dialog, Disclosure, Transition } from '@headlessui/react';
+import { Disclosure, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Button from './Button';
 
-interface NavItem {
+type NavItem = {
   name: string;
   href: string;
-  current: boolean;
-}
+  current?: boolean;
+};
 
 const navigation: NavItem[] = [
   { name: 'About', href: '#', current: true },
@@ -17,18 +17,15 @@ const navigation: NavItem[] = [
   { name: 'Contact', href: '#', current: false },
 ];
 
-interface NavItemProps {
+interface NavLinkProps extends NavItem {
   index: number;
-  name: string;
-  href: string;
-  current?: boolean;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ name, href, index, current }) => {
+const NavLink: React.FC<NavLinkProps> = ({ name, href, index }) => {
   return (
     <Link key={name} href={href}>
       <a>
-        <div className='font-mono text-accent-800 inline'>
+        <div className='font-mono text-accent-900 inline'>
           {String(index).padStart(2, '0') + '. '}
         </div>
         <div className='text-primary-100 hover:text-accent-800 inline'>
@@ -60,7 +57,7 @@ const NavBar = () => {
               <div className='hidden sm:block'>
                 <div className='flex gap-x-7 items-center'>
                   {navigation.map((item: NavItem, index) => (
-                    <NavItem
+                    <NavLink
                       key={item.name}
                       index={index}
                       name={item.name}
@@ -86,34 +83,34 @@ const NavBar = () => {
 
           <Disclosure.Panel className='sm:hidden'>
             {/* TODO: Change to: cubic-bezier(0.645, 0.045, 0.355, 1) */}
-            <Transition.Root show={open} as={Fragment}>
+            <Transition.Root show={open}>
               <div className='fixed inset-0 overflow-hidden'>
                 <Transition.Child
                   as={Fragment}
-                  enter='ease-in-out duration-150'
-                  enterFrom='opacity-0'
-                  enterTo='opacity-100'
-                  leave='ease-in-out duration-150'
-                  leaveFrom='opacity-100'
-                  leaveTo='opacity-0'
+                  enter='transition opacity filter ease-in-out duration-150'
+                  enterFrom='opacity-0 filter-none'
+                  enterTo='opacity-100 filter'
+                  leave='transition opacity filter ease-in-out duration-150'
+                  leaveFrom='opacity-100 filter'
+                  leaveTo='opacity-0 filter-none'
                 >
                   {/* Overloay */}
-                  <div className='absolute inset-0 bg-black bg-opacity-75 transition-opacity'></div>
+                  <div className='absolute inset-0 bg-black bg-opacity-75 backdrop-blur-lg'></div>
                 </Transition.Child>
 
                 <Transition.Child
                   as={Fragment}
-                  enter='transform transition ease-in-out duration-150'
+                  enter='transition transform ease-in-out duration-150'
                   enterFrom='translate-x-full'
                   enterTo='translate-x-0'
-                  leave='transform transition ease-in-out duration-150'
+                  leave='transition transform ease-in-out duration-150'
                   leaveFrom='translate-x-0'
                   leaveTo='translate-x-full'
                 >
-                  <div className='relative bg-primary-700 ml-24 h-full'>
+                  <div className='relative bg-primary-800 ml-24 h-full opacity-75 firefox:opacity-95'>
                     <div className='flex flex-col h-full gap-y-10 justify-center items-center'>
                       {navigation.map((item: NavItem, index) => (
-                        <NavItem
+                        <NavLink
                           key={item.name}
                           index={index}
                           name={item.name}
