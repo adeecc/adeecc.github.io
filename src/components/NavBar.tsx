@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import Link from 'next/link';
-import { Disclosure, Transition } from '@headlessui/react';
+import { Dialog, Disclosure, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Button from './Button';
+
 interface NavItem {
   name: string;
   href: string;
@@ -16,78 +17,86 @@ const navigation: NavItem[] = [
   { name: 'Contact', href: '#', current: false },
 ];
 
-interface Props {}
+interface NavItemProps {
+  index: number;
+  name: string;
+  href: string;
+  current?: boolean;
+}
 
-const NavBar = (props: Props) => {
+const NavItem: React.FC<NavItemProps> = ({ name, href, index, current }) => {
   return (
-    <Disclosure as='nav'>
+    <Link key={name} href={href}>
+      <a>
+        <div className='font-mono text-accent-800 inline'>
+          {String(index).padStart(2, '0') + '. '}
+        </div>
+        <div className='text-primary-100 hover:text-accent-800 inline'>
+          {name}
+        </div>
+      </a>
+    </Link>
+  );
+};
+
+const NavBar = () => {
+  return (
+    <Disclosure>
       {({ open }) => (
         <>
-          <div className='fixed w-screen px-6 lg:px-8'>
-            <div className='relative flex items-center justify-between h-20'>
+          {/* Main Navbar Starts */}
+          <nav className='fixed inset-0 z-40 w-full h-24 sm:h-36 px-8 sm:px-16'>
+            {/* Container for navbar elements */}
+            <div className='flex justify-between h-full items-center'>
               {/* Logo */}
-              <div className='flex-1 h-full flex items-center justify-start sm:items-stretch sm:justify-start'>
-                <div className='flex-shrink-0 flex items-center'>
-                  <img
-                    className='h-8 w-auto'
-                    src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
-                    alt='Workflow'
-                  />
-                </div>
+              <div className='inline-flex'>
+                <img
+                  className='block w-8 h-8'
+                  src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
+                  alt='Workflow'
+                />
               </div>
-
-              {/* Menu for big screens */}
-              <div className='hidden sm:block sm:h-full'>
-                {/** inline block instead? */}
-                <div className='flex h-full space-x-4 items-center'>
-                  {navigation.map((item, index) => (
-                    <Link key={item.name} href={item.href}>
-                      <a>
-                        <div className='font-mono text-accent-800 inline'>
-                          {String(index).padStart(2, '0') + '. '}
-                        </div>
-                        <div className='text-primary-100 hover:text-accent-800 inline'>
-                          {item.name}
-                        </div>
-                      </a>
-                    </Link>
+              {/* Nav Links for Big Screens */}
+              <div className='hidden sm:block'>
+                <div className='flex gap-x-7 items-center'>
+                  {navigation.map((item: NavItem, index) => (
+                    <NavItem
+                      key={item.name}
+                      index={index}
+                      name={item.name}
+                      href={item.href}
+                    />
                   ))}
-                  <Button href='#'>Resume</Button>
+                  <Button href=''>Resume</Button>
                 </div>
               </div>
-
-              {/* Button for Mobile */}
-              <Disclosure.Button className='flex items-center sm:hidden'>
-                {open ? (
-                  <XIcon
-                    className='text-primary-100 block h-6 w-6'
-                    aria-hidden='true'
-                  />
-                ) : (
-                  <MenuIcon
-                    className='text-primary-100 block h-6 w-6'
-                    aria-hidden='true'
-                  />
-                )}
-              </Disclosure.Button>
+              {/* Button for Mobile View */}
+              <div className='sm:hidden'>
+                <Disclosure.Button className='items-center text-primary-100 p-2 rounded-md hover:text-primary-200 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-primary-100'>
+                  <span className='sr-only'>Open main menu</span>
+                  {open ? (
+                    <XIcon className='block h-8 w-8' aria-hidden='true' />
+                  ) : (
+                    <MenuIcon className='block h-8 w-8' aria-hidden='true' />
+                  )}
+                </Disclosure.Button>
+              </div>
             </div>
-          </div>
+          </nav>
 
           <Disclosure.Panel className='sm:hidden'>
-            <div className='flex flex-col px-2 pt-2 pb-3 space-y-4 items-center'>
-              {navigation.map((item, index) => (
-                <Link key={item.name} href={item.href}>
-                  <a>
-                    <div className='font-mono text-accent-800 inline'>
-                      {String(index).padStart(2, '0') + '. '}
-                    </div>
-                    <div className='text-primary-100 hover:text-accent-800 inline'>
-                      {item.name}
-                    </div>
-                  </a>
-                </Link>
-              ))}
-              <Button href='#'>Resume</Button>
+            <div className='absolute inset-0 ml-24 bg-primary-800'>
+              <div className='flex flex-col h-full justify-center items-center gap-y-10'>
+                {navigation.map((item, index) => (
+                  <NavItem
+                    key={item.name}
+                    index={index}
+                    name={item.name}
+                    href={item.href}
+                  />
+                ))}
+                <Button href=''>Resume</Button>
+              </div>
             </div>
           </Disclosure.Panel>
         </>
