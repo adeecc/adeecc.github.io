@@ -85,19 +85,31 @@ const NavBar = () => {
           </nav>
 
           <Disclosure.Panel className='sm:hidden'>
-            <div className='absolute inset-0 ml-24 bg-primary-800'>
-              <div className='flex flex-col h-full justify-center items-center gap-y-10'>
-                {navigation.map((item, index) => (
-                  <NavItem
-                    key={item.name}
-                    index={index}
-                    name={item.name}
-                    href={item.href}
-                  />
-                ))}
-                <Button href=''>Resume</Button>
-              </div>
-            </div>
+            <Transition show={open}>
+              {/* TODO: Change to: cubic-bezier(0.645, 0.045, 0.355, 1) */}
+              <Transition.Child
+                enter='transition ease-in-out duration-150 transform '
+                enterFrom='translate-x-full'
+                enterTo='translate-x-0'
+                leave='transition ease-in-out duration-150 transform'
+                leaveFrom='translate-x-0'
+                leaveTo='translate-x-full'
+              >
+                <div className='fixed inset-0 ml-24 bg-primary-800'>
+                  <div className='absolute inset-0 flex flex-col h-full justify-center items-center gap-y-10'>
+                    {navigation.map((item, index) => (
+                      <NavItem
+                        key={item.name}
+                        index={index}
+                        name={item.name}
+                        href={item.href}
+                      />
+                    ))}
+                    <Button href=''>Resume</Button>
+                  </div>
+                </div>
+              </Transition.Child>
+            </Transition>
           </Disclosure.Panel>
         </>
       )}
