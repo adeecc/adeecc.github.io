@@ -26,10 +26,13 @@ const Hero: React.FC<Props> = () => {
               <p>
                 I'm a Computer Science Undergrad from India in my 3rd year. I
                 dabble mostly with{' '}
-                <span className='text-primary-100'>Frontend Development</span>{' '}
-                and <span className='text-primary-100'>Deep Learning</span>.
-                Occasionally, you may find me working on REST Backends and
-                Robotics.
+                <span className='font-mono text-accent-100'>Frontend</span> and{' '}
+                <span className='font-mono text-accent-100'>
+                  Backend Web Development
+                </span>
+                . Occasionally, you may find me exploring{' '}
+                <span className='font-mono text-accent-100'>Deep Learning</span>{' '}
+                and <span className='font-mono text-accent-100'>Robotics</span>.
               </p>
               <p>
                 Currently looking for internships in the fields of Software

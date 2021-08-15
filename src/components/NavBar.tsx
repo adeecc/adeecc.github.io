@@ -42,7 +42,7 @@ const NavBar = () => {
       {({ open }) => (
         <>
           {/* Main Navbar Starts */}
-          <nav className='fixed inset-0 z-40 w-full h-24 sm:h-36 px-8 sm:px-16'>
+          <nav className='fixed bg-primary-900 opacity-95 inset-0 z-40 w-full h-24 sm:h-36 px-8 sm:px-16'>
             {/* Container for navbar elements */}
             <div className='flex justify-between h-full items-center'>
               {/* Logo */}
@@ -107,7 +107,7 @@ const NavBar = () => {
                   leaveFrom='translate-x-0'
                   leaveTo='translate-x-full'
                 >
-                  <div className='relative bg-primary-800 ml-24 h-full opacity-75 firefox:opacity-95'>
+                  <div className='relative bg-primary-900 ml-24 h-full opacity-75 firefox:opacity-95'>
                     <div className='flex flex-col h-full gap-y-10 justify-center items-center'>
                       {navigation.map((item: NavItem, index) => (
                         <NavLink
