@@ -3,38 +3,43 @@ import Link from 'next/link';
 import { Disclosure, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Button from './Button';
+import { NavContext } from '../context/navContext';
 
 type NavItem = {
   name: string;
-  href: string;
+  navRef: any;
   current?: boolean;
 };
 
-const navigation: NavItem[] = [
-  { name: 'About', href: '/#about', current: true },
-  { name: 'Experience', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Contact', href: '#', current: false },
-];
-
 interface NavLinkProps extends NavItem {
   index: number;
+  close?: any;
 }
 
-const NavLink: React.FC<NavLinkProps> = ({ name, href, index }) => {
+const NavLink: React.FC<NavLinkProps> = ({ name, navRef, close }) => {
   return (
-    <Link key={name} href={href}>
-      <Disclosure.Button
-        as='a'
-        className='inline-flex text-primary-100 hover:text-accent-800 transition-colors transition-duration-50 ease-in'
-      >
-        {name}
-      </Disclosure.Button>
-    </Link>
+    <button
+      onClick={async () => {
+        navRef.current?.scrollIntoView({ behaviour: 'smooth' });
+        close && close();
+      }}
+      className='inline-flex text-primary-100 hover:text-accent-800 transition-colors transition-duration-50 ease-in'
+    >
+      {name}
+    </button>
   );
 };
 
 const NavBar = () => {
+  const { state } = useContext(NavContext);
+
+  const navigation: NavItem[] = [
+    { name: 'About', navRef: state.aboutRef, current: true },
+    { name: 'Experience', navRef: '#', current: false },
+    { name: 'Projects', navRef: '#', current: false },
+    { name: 'Contact', navRef: '#', current: false },
+  ];
+
   return (
     <Disclosure>
       {({ open }) => (
@@ -63,7 +68,7 @@ const NavBar = () => {
                       key={item.name}
                       index={index}
                       name={item.name}
-                      href={item.href}
+                      navRef={item.navRef}
                     />
                   ))}
                   <Button href=''>Resume</Button>
@@ -84,47 +89,49 @@ const NavBar = () => {
           </nav>
 
           <Disclosure.Panel className='sm:hidden'>
-            {/* TODO: Change to: cubic-bezier(0.645, 0.045, 0.355, 1) */}
-            <Transition.Root show={open}>
-              <div className='fixed inset-0 overflow-hidden'>
-                <Transition.Child
-                  as={Fragment}
-                  enter='transition opacity filter ease-in-out duration-150'
-                  enterFrom='opacity-0 filter-none'
-                  enterTo='opacity-100 filter'
-                  leave='transition opacity filter ease-in-out duration-150'
-                  leaveFrom='opacity-100 filter'
-                  leaveTo='opacity-0 filter-none'
-                >
-                  {/* Overlay */}
-                  <div className='absolute inset-0 bg-black bg-opacity-75 backdrop-blur-lg'></div>
-                </Transition.Child>
+            {({ close }) => (
+              <Transition.Root show={open}>
+                <div className='fixed inset-0 overflow-hidden'>
+                  <Transition.Child
+                    as={Fragment}
+                    enter='transition opacity filter ease-in-out duration-150'
+                    enterFrom='opacity-0 filter-none'
+                    enterTo='opacity-100 filter'
+                    leave='transition opacity filter ease-in-out duration-150'
+                    leaveFrom='opacity-100 filter'
+                    leaveTo='opacity-0 filter-none'
+                  >
+                    {/* Overlay */}
+                    <div className='absolute inset-0 bg-black bg-opacity-75 backdrop-blur-lg'></div>
+                  </Transition.Child>
 
-                <Transition.Child
-                  as={Fragment}
-                  enter='transition transform ease-in-out duration-150'
-                  enterFrom='translate-x-full'
-                  enterTo='translate-x-0'
-                  leave='transition transform ease-in-out duration-150'
-                  leaveFrom='translate-x-0'
-                  leaveTo='translate-x-full'
-                >
-                  <div className='relative bg-primary-900 h-full opacity-75 firefox:opacity-95'>
-                    <div className='flex flex-col h-full gap-y-10 justify-center items-center'>
-                      {navigation.map((item: NavItem, index) => (
-                        <NavLink
-                          key={item.name}
-                          index={index}
-                          name={item.name}
-                          href={item.href}
-                        />
-                      ))}
-                      <Button href=''>Resume</Button>
+                  <Transition.Child
+                    as={Fragment}
+                    enter='transition transform ease-in-out duration-150'
+                    enterFrom='translate-x-full'
+                    enterTo='translate-x-0'
+                    leave='transition transform ease-in-out duration-150'
+                    leaveFrom='translate-x-0'
+                    leaveTo='translate-x-full'
+                  >
+                    <div className='relative bg-primary-900 h-full opacity-75 firefox:opacity-95'>
+                      <div className='flex flex-col h-full gap-y-10 justify-center items-center'>
+                        {navigation.map((item: NavItem, index) => (
+                          <NavLink
+                            key={item.name}
+                            index={index}
+                            name={item.name}
+                            navRef={item.navRef}
+                            close={close}
+                          />
+                        ))}
+                        <Button href=''>Resume</Button>
+                      </div>
                     </div>
-                  </div>
-                </Transition.Child>
-              </div>
-            </Transition.Root>
+                  </Transition.Child>
+                </div>
+              </Transition.Root>
+            )}
           </Disclosure.Panel>
         </>
       )}

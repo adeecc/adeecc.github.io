@@ -59,7 +59,7 @@ const Home: React.FC = () => {
       <div className='col-span-10'>
         <Container>
           <Hero />
-          <About id="about" />
+          <About />
         </Container>
       </div>
       <div className='hidden col-span-1 sm:flex'>

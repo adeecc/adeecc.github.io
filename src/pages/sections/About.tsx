@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
+import { ActionTypes, NavContext } from '../../context/navContext';
 import SectionHeader from '../../components/SectionHeader';
 
-interface Props {
-  id: string;
-}
+interface Props {}
 
-const About: React.FC<Props> = ({ id }) => {
+const About: React.FC<Props> = () => {
+  const aboutRef = useRef();
+  const { state, dispatch } = useContext(NavContext);
+
+  useEffect(() => {
+    dispatch({
+      type: ActionTypes.SetAboutRef,
+      payload: {
+        aboutRef,
+      },
+    });
+  }, [dispatch]);
+
   return (
-    <div id={id} className='min-h-screen flex items-center'>
+    <div ref={state.aboutRef} className='min-h-screen flex items-center'>
       <div className='py-10 flex flex-col gap-y-10'>
         {/* Title */}
         <SectionHeader index={1} title='About Me' />
