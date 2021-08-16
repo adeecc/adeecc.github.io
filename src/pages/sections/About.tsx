@@ -2,11 +2,13 @@ import React from 'react';
 
 import SectionHeader from '../../components/SectionHeader';
 
-interface Props {}
+interface Props {
+  id: string;
+}
 
-const About: React.FC<Props> = (props: Props) => {
+const About: React.FC<Props> = ({ id }) => {
   return (
-    <div className='min-h-screen flex items-center'>
+    <div id={id} className='min-h-screen flex items-center'>
       <div className='py-10 flex flex-col gap-y-10'>
         {/* Title */}
         <SectionHeader index={1} title='About Me' />

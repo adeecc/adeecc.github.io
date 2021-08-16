@@ -11,7 +11,7 @@ type NavItem = {
 };
 
 const navigation: NavItem[] = [
-  { name: 'About', href: '#', current: true },
+  { name: 'About', href: '/#about', current: true },
   { name: 'Experience', href: '#', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Contact', href: '#', current: false },
@@ -24,9 +24,12 @@ interface NavLinkProps extends NavItem {
 const NavLink: React.FC<NavLinkProps> = ({ name, href, index }) => {
   return (
     <Link key={name} href={href}>
-      <a className='inline-flex text-primary-100 hover:text-accent-800 transition-colors transition-duration-50 ease-in'>
+      <Disclosure.Button
+        as='a'
+        className='inline-flex text-primary-100 hover:text-accent-800 transition-colors transition-duration-50 ease-in'
+      >
         {name}
-      </a>
+      </Disclosure.Button>
     </Link>
   );
 };
@@ -42,11 +45,15 @@ const NavBar = () => {
             <div className='flex justify-between h-full items-center gap-x-5'>
               {/* Logo */}
               <div className='inline-flex'>
-                <img
-                  className='block w-8 h-8'
-                  src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
-                  alt='Workflow'
-                />
+                <Link href='/'>
+                  <Disclosure.Button>
+                    <img
+                      className='block w-8 h-8'
+                      src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
+                      alt='Workflow'
+                    />
+                  </Disclosure.Button>
+                </Link>
               </div>
               {/* Nav Links for Big Screens */}
               <div className='hidden sm:block'>
