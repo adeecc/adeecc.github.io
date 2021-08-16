@@ -4,12 +4,12 @@ import SectionHeader from '../../components/SectionHeader';
 
 interface Props {}
 
-const About: React.FC<Props> = (props: Props) => {
+const About: React.FC<Props> = () => {
   return (
     <div className='min-h-screen flex items-center'>
       <div className='py-10 flex flex-col gap-y-10'>
         {/* Title */}
-        <SectionHeader index={1} title='About Me' />
+        <SectionHeader index={1}>About Me</SectionHeader>
         <div className='grid grid-cols-1 md:grid-cols-5 md:gap-5'>
           {/* Text */}
           <div className='flex flex-col md:max-w-md gap-y-5 col-span-1 md:col-span-3'>
