@@ -38,13 +38,14 @@ const About: React.FC<Props> = (props: Props) => {
             <div className='text-primary-100'>
               Here are the technologies I have worked with recently:
             </div>
-            <div className='text-accent-100'>
-              <ul className='list-disc list-inside flex flex-wrap gap-x-5 gap-y-2'>
-                <li className='flex-grow'>ReactJS | NextJS </li>
-                <li className='flex-grow'>Express | Django</li>
-                <li className='flex-grow'>REST | GraphQL</li>
-                <li className='flex-grow'>PyTorch | Keras</li>
-                <li className='flex-grow'>Stable Baselines</li>
+
+            <div className='font-mono text-sm text-accent-100'>
+              <ul className='list-disc list-inside grid grid-cols-2 gap-x-5 gap-y-2'>
+                <li>ReactJS | NextJS </li>
+                <li>Express | Django</li>
+                <li>REST | GraphQL</li>
+                <li>PyTorch | Keras</li>
+                <li>Stable Baselines</li>
               </ul>
             </div>
           </div>
@@ -54,7 +55,7 @@ const About: React.FC<Props> = (props: Props) => {
               <img
                 src='/profile.jpg'
                 alt='me'
-                className='relative w-full h-auto opacity-50 hover:opacity-100'
+                className='relative w-full h-auto transition-opacity duration-200 ease-in-out opacity-50 hover:opacity-100'
               />
             </div>
           </div>
