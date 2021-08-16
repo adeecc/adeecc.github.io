@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Link from 'next/link';
 import { Disclosure, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
@@ -24,13 +24,8 @@ interface NavLinkProps extends NavItem {
 const NavLink: React.FC<NavLinkProps> = ({ name, href, index }) => {
   return (
     <Link key={name} href={href}>
-      <a>
-        <div className='font-mono text-accent-900 inline'>
-          {String(index).padStart(2, '0') + '. '}
-        </div>
-        <div className='text-primary-100 hover:text-accent-800 inline'>
-          {name}
-        </div>
+      <a className='inline-flex text-primary-100 hover:text-accent-800 transition-colors transition-duration-50 ease-in'>
+        {name}
       </a>
     </Link>
   );
@@ -44,7 +39,7 @@ const NavBar = () => {
           {/* Main Navbar Starts */}
           <nav className='fixed bg-primary-900 opacity-95 inset-0 z-40 w-full h-24 sm:h-36 px-8 sm:px-16'>
             {/* Container for navbar elements */}
-            <div className='flex justify-between h-full items-center'>
+            <div className='flex justify-between h-full items-center gap-x-5'>
               {/* Logo */}
               <div className='inline-flex'>
                 <img
@@ -55,7 +50,7 @@ const NavBar = () => {
               </div>
               {/* Nav Links for Big Screens */}
               <div className='hidden sm:block'>
-                <div className='flex gap-x-7 items-center'>
+                <div className='flex gap-x-5 md:gap-x-10 items-center'>
                   {navigation.map((item: NavItem, index) => (
                     <NavLink
                       key={item.name}
@@ -94,7 +89,7 @@ const NavBar = () => {
                   leaveFrom='opacity-100 filter'
                   leaveTo='opacity-0 filter-none'
                 >
-                  {/* Overloay */}
+                  {/* Overlay */}
                   <div className='absolute inset-0 bg-black bg-opacity-75 backdrop-blur-lg'></div>
                 </Transition.Child>
 
@@ -107,7 +102,7 @@ const NavBar = () => {
                   leaveFrom='translate-x-0'
                   leaveTo='translate-x-full'
                 >
-                  <div className='relative bg-primary-900 ml-24 h-full opacity-75 firefox:opacity-95'>
+                  <div className='relative bg-primary-900 h-full opacity-75 firefox:opacity-95'>
                     <div className='flex flex-col h-full gap-y-10 justify-center items-center'>
                       {navigation.map((item: NavItem, index) => (
                         <NavLink
