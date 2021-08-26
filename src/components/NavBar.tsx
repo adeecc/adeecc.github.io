@@ -1,5 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Disclosure, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Button from './Button';
@@ -17,11 +18,17 @@ interface NavLinkProps extends NavItem {
 }
 
 const NavLink: React.FC<NavLinkProps> = ({ name, navRef, close }) => {
+  const router = useRouter();
   return (
     <button
       onClick={async () => {
-        navRef.current?.scrollIntoView({ behaviour: 'smooth' });
-        close && close();
+        console.log(navRef);
+        if (!navRef) {
+          router.push('/');
+        } else {
+          navRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+        if (close) close();
       }}
       className='inline-flex text-primary-100 hover:text-accent-800 transition-colors transition-duration-50 ease-in'
     >
@@ -31,6 +38,8 @@ const NavLink: React.FC<NavLinkProps> = ({ name, navRef, close }) => {
 };
 
 const NavBar = () => {
+  const router = useRouter();
+
   const { state } = useContext(NavContext);
 
   const navigation: NavItem[] = [
@@ -51,13 +60,19 @@ const NavBar = () => {
               {/* Logo */}
               <div className='inline-flex'>
                 <Link href='/'>
-                  <Disclosure.Button>
+                  <button
+                    onClick={async () => {
+                      router.push('/');
+                      close && close();
+                    }}
+                    className='inline-flex text-primary-100 hover:text-accent-800 transition-colors transition-duration-50 ease-in'
+                  >
                     <img
                       className='block w-8 h-8'
                       src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
                       alt='Workflow'
                     />
-                  </Disclosure.Button>
+                  </button>
                 </Link>
               </div>
               {/* Nav Links for Big Screens */}
