@@ -12,9 +12,9 @@ type NavItem = {
 
 const navigation: NavItem[] = [
   { name: 'About', href: '/#about', current: true },
-  { name: 'Experience', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Contact', href: '#', current: false },
+  { name: 'Experience', href: '/#experience', current: false },
+  { name: 'Projects', href: '/#projects', current: false },
+  { name: 'Contact', href: '/#', current: false },
 ];
 
 interface NavLinkProps extends NavItem {
@@ -66,7 +66,7 @@ const NavBar = () => {
                       href={item.href}
                     />
                   ))}
-                  <Button href=''>Resume</Button>
+                  <Button href='https://drive.google.com/file/d/1EpA4CE58jBXK8n7WY80Z-LIyYAKvj_cO/view?usp=sharing'>Resume</Button>
                 </div>
               </div>
               {/* Button for Mobile View */}
@@ -119,7 +119,7 @@ const NavBar = () => {
                           href={item.href}
                         />
                       ))}
-                      <Button href=''>Resume</Button>
+                      <Button href='https://drive.google.com/file/d/1EpA4CE58jBXK8n7WY80Z-LIyYAKvj_cO/view?usp=sharing'>Resume</Button>
                     </div>
                   </div>
                 </Transition.Child>

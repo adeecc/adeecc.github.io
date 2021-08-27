@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SectionHeader from '../../components/SectionHeader';
+import TintImg from '../../components/TintImg';
 
 interface Props {}
 
@@ -51,13 +52,7 @@ const About: React.FC<Props> = () => {
           </div>
           {/* Picture */}
           <div className='hidden md:block relative my-auto md:col-span-2 overflow-hidden'>
-            <div className='bg-accent-900 overflow-hidden rounded-lg'>
-              <img
-                src='/profile.jpg'
-                alt='me'
-                className='relative w-full h-auto transition-opacity duration-200 ease-in-out opacity-50 hover:opacity-100'
-              />
-            </div>
+            <TintImg src='images/profile.jpg' />
           </div>
         </div>
       </div>

@@ -6,9 +6,11 @@ import Hero from './sections/Hero';
 
 import SvgOutlineGithub from '../icons/github';
 import SvgOutlineLinkedin from '../icons/linkedin';
-import SvgOutlineTwitter from '../icons/instagram';
-import SvgOutlineInstagram from '../icons/twitter';
+import SvgOutlineInstagram from '../icons/instagram';
+import SvgOutlineTwitter from '../icons/twitter';
 import WithID from '../utils/WithID';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
 
 interface SocialLink {
   logo: JSX.Element;
@@ -60,7 +62,15 @@ const Home: React.FC = () => {
       <div className='col-span-10'>
         <Container>
           <Hero />
-          <WithID id='about'><About /></WithID>
+          <WithID id='about'>
+            <About />
+          </WithID>
+          <WithID id='experience'>
+            <Experience />
+          </WithID>
+          <WithID id='projects'>
+            <Projects />
+          </WithID>
         </Container>
       </div>
       <div className='hidden col-span-1 sm:flex'>
