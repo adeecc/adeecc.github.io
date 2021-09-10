@@ -38,6 +38,18 @@ const featuredProjects: Array<project> = [
     stack: ['Django', 'Postgres', 'Redis', 'Azure Cloud', 'Heroku'],
     link: 'https://github.com/adeecc/shiftr_api',
   },
+  {
+    _id: 3,
+    title: 'Meet Helper',
+    desc: (
+      <p>
+        Web Application to track and manage Google-Meet Links for courses conducted during online semesters.
+      </p>
+    ),
+    img: '/images/meethelp.png',
+    stack: ['Express', 'MongoDB', 'React', 'Heroku'],
+    link: 'https://github.com/adeecc/meet_helper',
+  },
 ];
 
 interface Props {}

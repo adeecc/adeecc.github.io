@@ -47,7 +47,7 @@ const classNames = (...classes) => {
 const Experience: React.FC<Props> = () => {
   return (
     <div className='min-h-screen flex items-center'>
-      <div className='my-10 flex flex-col gap-y-10'>
+      <div className='my-10 min-h-[36rem] md:min-h-[16rem] h-64 flex flex-col gap-y-10'>
         <SectionHeader index={2}>Experience</SectionHeader>
         <Tab.Group vertical defaultIndex={0}>
           <div className='grid grid-cols-1 sm:grid-cols-12 gap-3 '>

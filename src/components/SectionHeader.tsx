@@ -6,7 +6,7 @@ interface Props {
 
 const SectionHeader: React.FC<Props> = ({ index, children }) => {
   return (
-    <div className='flex items-center'>
+    <div className='flex items-center mb-10'>
       <span className='font-mono text-3xl text-accent-900'>
         {String(index).padStart(2, '0') + '. '}
       </span>

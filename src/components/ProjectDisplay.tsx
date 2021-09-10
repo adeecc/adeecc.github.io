@@ -48,7 +48,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({
   return (
     <div
       className={classNames(
-        'flex flex-col gap-y-5 row-span-full from-transparent via-primary-900 to-primary-900 h-full col-span-full md:col-span-5 px-4 py-6 justify-center',
+        'flex flex-col gap-y-5 row-span-full from-transparent via-primary-900 to-primary-900 h-full col-span-full md:col-span-4 px-4 py-6 justify-center',
         _id % 2
           ? 'bg-gradient-to-r md:col-end-11 items-end'
           : 'bg-gradient-to-l md:col-start-1 items-start'
@@ -68,7 +68,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({
           </Link>
         )}
       </div>
-      <div className='max-w-md sm:max-w-lg'>
+      <div className=''>
         <div
           className={classNames(
             'text-primary-100',
@@ -78,7 +78,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({
           {desc}
         </div>
       </div>
-      <div className='flex gap-x-2 font-mono text-xs text-accent-100'>
+      <div className={classNames('flex flex-wrap gap-x-2 font-mono text-xs text-accent-100', _id % 2 ? 'justify-end' : 'justify-start')}>
         {stack.map((item) => (
           <span key={item}>{item}</span>
         ))}

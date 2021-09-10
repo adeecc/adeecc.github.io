@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 
 import Container from '../components/Container';
 import About from './sections/About';
@@ -57,34 +58,43 @@ const SideBar: React.FC = ({ children }) => {
 
 const Home: React.FC = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-12 gap-x-2'>
-      <div className='hidden col-span-1 sm:flex'></div>
-      <div className='col-span-10'>
-        <Container>
-          <Hero />
-          <WithID id='about'>
-            <About />
-          </WithID>
-          <WithID id='experience'>
-            <Experience />
-          </WithID>
-          <WithID id='projects'>
-            <Projects />
-          </WithID>
-        </Container>
+    <>
+      <Head>
+        <title>adeecc || Aditya Chopra</title>
+
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+      </Head>
+
+      <div className='grid grid-cols-1 sm:grid-cols-12 gap-x-2'>
+        <div className='hidden col-span-1 sm:flex'></div>
+        <div className='col-span-10'>
+          <Container>
+            <Hero />
+            <WithID id='about'>
+              <About />
+            </WithID>
+            <WithID id='experience'>
+              <Experience />
+            </WithID>
+            <WithID id='projects'>
+              <Projects />
+            </WithID>
+          </Container>
+        </div>
+        <div className='hidden col-span-1 sm:flex'>
+          <SideBar>
+            <ul className='grid grid-cols-1 gap-y-5'>
+              {SocialLinks.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href}>{item.logo}</a>
+                </li>
+              ))}
+            </ul>
+          </SideBar>
+        </div>
       </div>
-      <div className='hidden col-span-1 sm:flex'>
-        <SideBar>
-          <ul className='grid grid-cols-1 gap-y-5'>
-            {SocialLinks.map((item) => (
-              <li key={item.href}>
-                <a href={item.href}>{item.logo}</a>
-              </li>
-            ))}
-          </ul>
-        </SideBar>
-      </div>
-    </div>
+    </>
   );
 };
 
