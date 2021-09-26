@@ -1,9 +1,7 @@
 {
-  "eslintIntegration": true,
-  "singleQuote": true,
-  "useTabs": false,
-  "tabWidth": 2,
-  "semi": true,
+  "arrowParens": "always",
   "jsxSingleQuote": true,
-  "arrowParens": "always"
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "none"
 }
