@@ -49,11 +49,11 @@ export const getStaticProps: GetStaticProps = async () => {
 const Blog: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   posts
 }) => {
-  console.log(posts);
+//   console.log(posts);
   return (
-    <div className='text-primary-100 my-64'>
-      {JSON.stringify(posts, null, 2)}
-    </div>
+    <pre className='text-primary-100 my-64'>
+      {JSON.stringify(posts, null, '\t')}
+    </pre>
   );
 };
 

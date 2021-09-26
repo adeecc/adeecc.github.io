@@ -1,186 +1,59 @@
 ---
-title: 'Markdown Guide'
-date: '2019-10-11'
+title: 'Basic Markdown'
+date: '26 Sep 2021'
 tags: ['github', 'guide']
 draft: false
-summary: 'Markdown cheatsheet for all your blogging needs - headers, lists, images, tables and more! An illustrated guide based on Github Flavored Markdown.'
+summary: 'Very Basic MD File'
 ---
 
-# Introduction
+# This is a title
 
-Markdown and Mdx parsing is supported via `unified`, and other remark and rehype packages. `next-mdx-remote` allows us to parse `.mdx` and `.md` files in a more flexible manner without touching webpack.
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero eligendi iste, exercitationem dolores esse enim dolorem earum incidunt, explicabo animi asperiores ipsam ea molestias delectus aliquam. Fugiat aliquam fugit error soluta totam dolore quibusdam sit architecto asperiores eum itaque dolorem enim ipsum molestiae, corrupti recusandae nisi vel quo! Voluptas, quaerat.
 
-Github flavored markdown is used. `mdx-prism` provides syntax highlighting capabilities for code blocks. Here's a demo of how everything looks.
+## This is a secondary title
 
-The following markdown cheatsheet is adapted from: https://guides.github.com/features/mastering-markdown/
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero eligendi iste, exercitationem dolores esse enim dolorem earum incidunt, explicabo animi asperiores ipsam ea molestias delectus aliquam. Fugiat aliquam fugit error soluta totam dolore quibusdam sit architecto asperiores eum itaque dolorem enim ipsum molestiae, corrupti recusandae nisi vel quo! Voluptas, quaerat.
 
-# What is Markdown?
+### TODOS:
 
-Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like `#` or `*`.
+- [ ] Get Math Working
+- [ ] Ordered Lists
+- [ ] Get Code Syntax highlighting - Working
+- [ ] Get Links Working
+- [ ] Get Block Quotes working
 
-# Syntax guide
+## Checks
 
-Here’s an overview of Markdown syntax that you can use anywhere on GitHub.com or in your own text files.
+1. Code
 
-## Headers
+```js
+import getAllFilesFrontMatter from 'lib/mdx';
 
-```
-# This is a h1 tag
-
-## This is a h2 tag
-
-#### This is a h4 tag
-```
-
-# This is a h1 tag
-
-## This is a h2 tag
-
-#### This is a h4 tag
-
-## Emphasis
-
-```
-_This text will be italic_
-
-**This text will be bold**
-
-_You **can** combine them_
+const posts = await getAllFilesFrontMatter('blog');
 ```
 
-_This text will be italic_
+2. Math
 
-**This text will be bold**
+$$
+\mathbf{X} = \left[\begin{array}
+	{ccccc}
+	x_{11} & . & . & . & x_{1k} \\
+	. & . & . & . & .  \\
+	. & . & . & . & .  \\
+	. & . & . & . & .  \\
+	x_{n1} & . & . & . & x_{nn}
+\end{array}\right] =
+\left[\begin{array}
+	{c}
+	\mathbf{x}'_1 \\
+	. \\
+	. \\
+	. \\
+	\mathbf{x}'_n
+\end{array}\right]
+$$
 
-_You **can** combine them_
+3. Links:
 
-## Lists
-
-### Unordered
-
-```
-- Item 1
-- Item 2
-  - Item 2a
-  - Item 2b
-```
-
-- Item 1
-- Item 2
-  - Item 2a
-  - Item 2b
-
-### Ordered
-
-```
-1. Item 1
-1. Item 2
-1. Item 3
-   1. Item 3a
-   1. Item 3b
-```
-
-1. Item 1
-1. Item 2
-1. Item 3
-   1. Item 3a
-   1. Item 3b
-
-## Images
-
-```
-![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-Format: ![Alt Text](url)
-```
-
-![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-
-## Links
-
-```
-http://github.com - automatic!
-[GitHub](http://github.com)
-```
-
-http://github.com - automatic!
-[GitHub](http://github.com)
-
-## Blockquotes
-
-```
-As Kanye West said:
-
-> We're living the future so
-> the present is our past.
-```
-
-As Kanye West said:
-
-> We're living the future so
-> the present is our past.
-
-## Inline code
-
-```
-I think you should use an
-`<addr>` element here instead.
-```
-
-I think you should use an
-`<addr>` element here instead.
-
-## Syntax highlighting
-
-Here’s an example of how you can use syntax highlighting with [GitHub Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/):
-
-````
-```js:fancyAlert.js
-function fancyAlert(arg) {
-  if (arg) {
-    $.facebox({ div: '#foo' })
-  }
-}
-```
-````
-
-And here's how it looks - nicely colored with styled code titles!
-
-```js:fancyAlert.js
-function fancyAlert(arg) {
-  if (arg) {
-    $.facebox({ div: '#foo' })
-  }
-}
-```
-
-## Task Lists
-
-```
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
-```
-
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
-
-## Tables
-
-You can create tables by assembling a list of words and dividing them with hyphens `-` (for the first row), and then separating each column with a pipe `|`:
-
-```
-| First Header                | Second Header                |
-| --------------------------- | ---------------------------- |
-| Content from cell 1         | Content from cell 2          |
-| Content in the first column | Content in the second column |
-```
-
-| First Header                | Second Header                |
-| --------------------------- | ---------------------------- |
-| Content from cell 1         | Content from cell 2          |
-| Content in the first column | Content in the second column |
-
-## Strikethrough
-
-Any word wrapped with two tildes (like `~~this~~`) will appear ~~crossed out~~.
+- [leerob.io](https://leerob.io/blog/tailwind)
+- [timlrx.com](https://www.timlrx.com/)
