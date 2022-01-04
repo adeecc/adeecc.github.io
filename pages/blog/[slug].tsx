@@ -1,91 +1,71 @@
-import React, { useMemo } from 'react';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { getMDXComponent } from 'mdx-bundler/client';
+import type {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+  NextPage
+} from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
 
-import fs from 'fs';
-import path from 'path';
+import { useMDXComponent } from 'next-contentlayer/hooks';
+import { allBlogs } from '.contentlayer/data';
+import type { Blog } from '.contentlayer/types';
 
-import { bundleMDX } from 'mdx-bundler';
-import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math';
-
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeKatex from 'rehype-katex';
-import rehypePrismPlus from 'rehype-prism-plus';
-import rehypeSlug from 'rehype-slug';
-
-type Post = {
-  code: string;
-  frontmatter: {
-    [key: string]: any;
-  };
-};
+import Container from '../../components/Container';
+import components from '../../components/MDXComponents';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = fs.readdirSync(path.join(process.cwd(), 'data', 'blog'));
-  // console.log(posts);
-
   return {
-    paths: posts.map((p) => ({
-      params: {
-        slug: p.replace('.md', '')
-      }
-    })),
+    paths: allBlogs.map((p) => ({ params: { slug: p.slug } })),
     fallback: false
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params.slug;
-  const source = fs.readFileSync(
-    path.join(process.cwd(), 'data', 'blog', `${slug}.md`),
-    'utf8'
-  );
-
-  const { code, frontmatter } = await bundleMDX(source, {
-    xdmOptions(options) {
-      options.remarkPlugins = [
-        ...(options?.remarkPlugins ?? []),
-        remarkGfm,
-        remarkMath
-      ];
-
-      options.rehypePlugins = [
-        ...(options?.rehypePlugins ?? []),
-        rehypeSlug,
-        [rehypeAutolinkHeadings, { properties: { classname: ['anchor'] } }],
-        rehypeKatex,
-        [rehypePrismPlus, { ignoreMissing: true }]
-      ];
-
-      return options;
-    }
-  });
-
-  const post: Post = {
-    code,
-    frontmatter: {
-      ...frontmatter,
-      date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
-      slug: slug || null
-    }
-  };
-
-  // console.log(post);
-
+  const post = allBlogs.find((post) => post.slug === params?.slug);
   return {
-    props: post
+    props: { post }
   };
 };
 
-const Blog: React.FC<Post> = ({ code, frontmatter }) => {
-  const Component = useMemo(() => getMDXComponent(code), [code]);
+const BlogPost: NextPage<{ post: Blog }> = ({ post }) => {
+  const Component = useMDXComponent(post.body.code);
+
   return (
-    <div className="mt-48 text-primary-100">
-      <pre>{JSON.stringify(frontmatter, null, '\t')}</pre>
-      <Component />
-    </div>
+    <>
+      <Head>
+        <title>{post.title}</title>
+
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link
+          rel='stylesheet'
+          href='https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css'
+          integrity='sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn'
+        ></link>
+      </Head>
+
+      <Container>
+        <div className='flex flex-col'>
+          <h1 className='text-5xl font-semibold'>{post.title}</h1>
+          <div className='flex justify-between'>
+            <span className='text-sm text-primary-300'>
+              Aditya Chopra // {post.publishedAt}
+            </span>
+            <div className='text-sm text-primary-300'>
+              {post.readingTime.text}
+            </div>
+          </div>
+
+          {/* Add a contents page */}
+        </div>
+
+        <div className='prose prose-invert'>
+          <Component components={{ ...components } as any} />
+        </div>
+      </Container>
+    </>
   );
 };
 
-export default Blog;
+export default BlogPost;

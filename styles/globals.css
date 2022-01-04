@@ -2,23 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 @tailwind base;
+@tailwind components;
 @tailwind utilities;
-
-h1,
-h2,
-h3,
-h4,
-p {
-  line-height: 1.6;
-}
-
-h1,
-h2,
-h3,
-h4,
-p.bold {
-  font-weight: 700;
-}
 
 :root {
   font-size: 16px;
@@ -39,31 +24,14 @@ p.bold {
   --color-accent-disabled: #f5bfbf;
   --screen-height-reduction: 0px;
   --color-primary-100-translucent: rgba(222, 227, 234, 0.15);
-}
 
-h1 {
-  font-size: 4rem;
-}
-
-h2 {
-  font-size: 2.8rem;
-}
-
-h3 {
-  font-size: 2rem;
-}
-
-h4 {
-  font-size: 1.4rem;
-}
-
-p {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-p.small {
-  font-size: 0.85rem;
+  --color-gh-red: #ff7a73;
+  --color-gh-orange: #ffa657;
+  --color-gh-magenta: #d2a9fe;
+  --color-gh-blue: #79c0ff;
+  --color-gh-white: #c9d1d9;
+  --color-gh-green: #7ee787;
+  --color-gh-backround: #161a22;
 }
 
 /* for firefox */
@@ -95,5 +63,244 @@ html {
 body,
 #__next {
   background-color: var(--color-primary-900);
+  color: var(--color-primary-100);
   box-sizing: border-box;
+}
+
+.prose .anchor {
+  @apply absolute invisible;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible no-underline;
+}
+
+.prose a {
+  @apply transition-all;
+}
+
+.prose .anchor:after {
+  @apply text-primary-300 dark:text-primary-700;
+  content: '#';
+}
+
+.prose *:hover > .anchor {
+  @apply visible no-underline;
+}
+
+.prose pre {
+  @apply border border-primary-200 bg-primary-100 dark:border-primary-700 dark:bg-primary-900;
+}
+
+.prose code {
+  @apply text-primary-800 dark:text-primary-200 px-1 py-0.5 border border-primary-100 dark:border-primary-800 rounded-lg bg-primary-100 dark:bg-primary-900;
+}
+
+.prose pre code {
+  @apply text-primary-800 dark:text-primary-200 p-0;
+  border: initial;
+}
+
+.prose img {
+  /* Don't apply styles to next/image */
+  @apply m-0;
+}
+
+.prose > :first-child {
+  /* Override removing top margin, causing layout shift */
+  margin-top: 1.25em !important;
+  margin-bottom: 1.25em !important;
+}
+
+/* Prism Code Color Schemes */
+
+code[class*='language-'],
+pre[class*='language-'] {
+  color: black;
+  background: none;
+  font-family: 'Roboto Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+    monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection {
+  text-shadow: none;
+  background: rgba(1, 1, 1, 0.25);
+}
+
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection,
+code[class*='language-']::selection,
+code[class*='language-'] ::selection {
+  text-shadow: none;
+  background: #112334;
+}
+
+@media print {
+  code[class*='language-'],
+  pre[class*='language-'] {
+    text-shadow: none;
+  }
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  /* background: #f5f2f0; */
+  background: var(--color-gh-backround);
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray;
+}
+
+.token.punctuation {
+  color: #999;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--color-gh-blue);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color:var(--color-gh-blue);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: var(--color-gh-red);
+  /* This background color was intended by the author of this theme. */
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--color-gh-red);
+}
+
+.token.function,
+.token.class-name {
+  color: var(--color-gh-magenta);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--color-gh-orange);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Rehype */
+
+.rehype-code-title {
+  @apply px-5 py-3 font-mono text-sm font-bold text-primary-800 bg-primary-200 border border-b-0 border-primary-200 rounded-t-lg dark:text-primary-200 dark:border-primary-700 dark:bg-primary-800;
+}
+
+.rehype-code-title + pre {
+  @apply mt-0 rounded-t-none;
+}
+
+.highlight-line {
+  @apply block px-4 -mx-4 bg-primary-100 border-l-4 border-accent-100 dark:bg-primary-800;
+}
+
+/* Remove Safari input shadow on mobile */
+input[type='text'],
+input[type='email'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.metric-card > a {
+  @apply no-underline;
+}
+
+.metric-card > p {
+  @apply my-2;
+}
+
+.step > h3 {
+  @apply my-0;
+}
+
+.prose .tweet a {
+  text-decoration: inherit;
+  font-weight: inherit;
+}
+
+table {
+  display: block;
+  max-width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
 }
