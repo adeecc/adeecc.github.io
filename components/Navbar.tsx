@@ -6,7 +6,7 @@ import cn from 'classnames';
 import Container from './Container';
 import MobileMenu from './MobileMenu';
 
-import { NavItem } from '../lib/types';
+import { NavItem } from 'lib/types';
 
 const NavItem: React.FC<NavItem> = ({ href, text }) => {
   const router = useRouter();

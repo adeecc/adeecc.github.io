@@ -3,7 +3,7 @@ import NextLink from 'next/link';
 
 import Container from './Container';
 
-import { NavItem, SocialItem } from '../lib/types';
+import { NavItem, SocialItem } from 'lib/types';
 
 interface FooterProps {
   navigation: NavItem[];

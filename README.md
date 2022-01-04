@@ -10,3 +10,16 @@ Dark Mode is a first class citizen in this Project.
 - [ ] SEO
 - [ ] Add your own Logo
 - [ ] Start Blogging
+
+## Blog Header Format
+
+```md
+---
+title: 'Nice Title'
+published: 'YYYY-MM-DD'
+tags: ['tags', 'in', 'a', 'list']
+summary: 'Good ol Summary'
+---
+
+> Happy Writing!
+```

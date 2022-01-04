@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
-import styles from '../styles/mobile-menu.module.css';
+import styles from 'styles/mobile-menu.module.css';
 
-import { NavItem } from '../lib/types';
+import { NavItem } from 'lib/types';
 import { useRouter } from 'next/router';
-import Container from './Container';
 
 interface MobileMenuItemProps extends NavItem {
   toggleFn: () => void;

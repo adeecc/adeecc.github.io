@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import Container from '../components/Container';
-import Projects from '../components/Projects';
-import Timeline from '../components/Timeline';
+import Container from 'components/Container';
+import Projects from 'components/Projects';
+import Timeline from 'components/Timeline';
 
 const Home: NextPage = () => {
   return (

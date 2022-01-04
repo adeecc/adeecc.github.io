@@ -1,19 +1,22 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
 import NextLink from 'next/link';
 
 import { allBlogs } from '.contentlayer/data';
+import type { Blog } from '.contentlayer/types';
 
-import { pick } from '../lib/utils';
-import Container from '../components/Container';
+import { pick } from 'lib/utils';
+import Container from 'components/Container';
+import TagList from 'components/Tags';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const posts = allBlogs
-    .map((post) => pick(post, ['slug', 'title', 'summary', 'publishedAt']))
+    .map((post) =>
+      pick(post, ['slug', 'title', 'summary', 'published', 'tags'])
+    )
     .sort(
-      (a, b) =>
-        Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
+      (a, b) => Number(new Date(b.published)) - Number(new Date(a.published))
     );
 
   return { props: { posts } };
@@ -23,8 +26,26 @@ const Blog: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   posts
 }) => {
   const [searchString, setSearchString] = useState('');
-  const filteredBlogPosts = posts.filter((post: any) =>
-    post.title.toLowerCase().includes(searchString.toLowerCase())
+  const filteredBlogPosts = useMemo(
+    () =>
+      posts
+        .filter((post: Blog) =>
+          post.title
+            .toLowerCase()
+            .concat(post.tags.join())
+            .includes(searchString.toLowerCase())
+        )
+        .map((post: Blog) => {
+          return {
+            ...post,
+            published: new Date(post.published).toLocaleDateString('en-US', {
+              day: 'numeric',
+              year: 'numeric',
+              month: 'short'
+            })
+          };
+        }),
+    [posts, searchString]
   );
 
   return (
@@ -71,8 +92,11 @@ const Blog: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             <NextLink key={post.slug} href={`/blog/${post.slug}`}>
               <a className='flex flex-col gap-y-3'>
                 <h3 className='text-xl font-semibold'>{post.title}</h3>
-                <div className='text-primary-300 text-xs'>
-                  <span>{post.publishedAt}</span>
+                <div className='flex justify-between items-center'>
+                  <span className='text-primary-300 text-xs'>
+                    {post.published}
+                  </span>
+                  <TagList tags={post.tags} />
                 </div>
                 <div className='border-l-4 border-accent-800 pl-4 text-primary-200'>
                   {post.summary}
