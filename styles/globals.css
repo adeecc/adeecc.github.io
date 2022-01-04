@@ -2,23 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 @tailwind base;
+@tailwind components;
 @tailwind utilities;
-
-h1,
-h2,
-h3,
-h4,
-p {
-  line-height: 1.6;
-}
-
-h1,
-h2,
-h3,
-h4,
-p.bold {
-  font-weight: 700;
-}
 
 :root {
   font-size: 16px;
@@ -39,31 +24,6 @@ p.bold {
   --color-accent-disabled: #f5bfbf;
   --screen-height-reduction: 0px;
   --color-primary-100-translucent: rgba(222, 227, 234, 0.15);
-}
-
-h1 {
-  font-size: 4rem;
-}
-
-h2 {
-  font-size: 2.8rem;
-}
-
-h3 {
-  font-size: 2rem;
-}
-
-h4 {
-  font-size: 1.4rem;
-}
-
-p {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-p.small {
-  font-size: 0.85rem;
 }
 
 /* for firefox */
@@ -95,5 +55,6 @@ html {
 body,
 #__next {
   background-color: var(--color-primary-900);
+  color: var(--color-primary-100);
   box-sizing: border-box;
 }

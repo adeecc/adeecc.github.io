@@ -1,4 +1,10 @@
+/** @type {import('next').NextConfig} */
 module.exports = {
-  experimental: { esmExternals: true },
   reactStrictMode: true,
+  images: {
+    domains: [
+      'avatars.githubusercontent.com',
+      'https://avatars.githubusercontent.com'
+    ]
+  }
 };
