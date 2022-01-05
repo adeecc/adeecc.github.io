@@ -14,7 +14,7 @@ export const TagBullet: React.FC<Props> = ({ text }) => {
 
 const TagList: React.FC<{ tags: string[] }> = ({ tags }) => {
   return (
-    <div className='flex gap-x-1 items-center'>
+    <div className='flex gap-x-1 items-center flex-wrap'>
       {tags?.map((text) => (
         <TagBullet key={text} text={text} />
       ))}

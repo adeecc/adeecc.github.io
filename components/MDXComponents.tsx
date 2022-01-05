@@ -10,12 +10,24 @@ const CustomLink = (props: any) => {
   if (isInternalLink) {
     return (
       <Link href={href}>
-        <a {...props}>{props.children}</a>
+        <a
+          className='no-underline text-accent-800 hover:text-accent-900 transition-all'
+          {...props}
+        >
+          {props.children}
+        </a>
       </Link>
     );
   }
 
-  return <a target='_blank' rel='noopener noreferrer' {...props} />;
+  return (
+    <a
+      target='_blank'
+      rel='noopener noreferrer'
+      className='no-underline text-accent-800 hover:text-accent-900 transition-all'
+      {...props}
+    />
+  );
 };
 
 function RoundedImage(props: any) {
