@@ -39,3 +39,6 @@ yarn-error.log*
 
 # Contentlayer
 .contentlayer
+
+# Misc
+data/starter.mdx

@@ -52,7 +52,7 @@ const BlogPost: NextPage<{ post: Blog }> = ({ post }) => {
       </Head>
 
       <Container>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-y-3'>
           <h1 className='text-5xl font-semibold'>{post.title}</h1>
           <div className='flex justify-between items-center'>
             <div className='flex gap-x-3 items-center'>
@@ -64,6 +64,10 @@ const BlogPost: NextPage<{ post: Blog }> = ({ post }) => {
             <div className='text-sm text-primary-300'>
               {post.readingTime.text}
             </div>
+          </div>
+
+          <div className='border-l-4 border-accent-800 bg-primary-800 px-4 py-5 text-primary-200'>
+            {post.summary}
           </div>
         </div>
 
