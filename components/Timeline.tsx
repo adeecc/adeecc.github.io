@@ -32,14 +32,6 @@ const events: Event[] = [
     org: 'D.E. Shaw',
     details: ['Coming Soon!']
   }
-  //   {
-  //     id: 3,
-  //     time: 'May 2022 - Jun 2022',
-  //     loc: 'Hyd, India',
-  //     position: 'Summer Intern',
-  //     org: 'D.E. Shaw',
-  //     details: ['Coming Soon!']
-  //   }
 ];
 
 interface TimelineItemProps {

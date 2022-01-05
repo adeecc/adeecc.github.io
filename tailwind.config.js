@@ -64,5 +64,5 @@ module.exports = {
       'slide-in': 'slidein 0.2s ease-out' 
     },
   },
-  plugins: []
+  plugins: [require('@tailwindcss/typography')]
 };

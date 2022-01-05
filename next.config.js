@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const { withContentlayer } = require('next-contentlayer');
+
+module.exports = withContentlayer()({
+  swcMinify: true,
   reactStrictMode: true,
   images: {
     domains: [
@@ -7,4 +10,4 @@ module.exports = {
       'https://avatars.githubusercontent.com'
     ]
   }
-};
+});
