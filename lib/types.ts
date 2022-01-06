@@ -7,3 +7,8 @@ export type SocialItem = {
   href: string;
   icon: JSX.Element;
 };
+
+export type NumViews = {
+  _id: string;
+  count: number;
+}

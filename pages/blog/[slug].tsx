@@ -8,7 +8,8 @@ import type { Blog } from '.contentlayer/types';
 import Container from 'components/Container';
 import components from 'components/MDXComponents';
 import TagList from 'components/Tags';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { NumViewsDao } from 'lib/dbConnect';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -19,6 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = allBlogs.find((post) => post.slug === params?.slug);
+
   return {
     props: { post }
   };
@@ -36,6 +38,17 @@ const BlogPost: NextPage<{ post: Blog }> = ({ post }) => {
     [post.published]
   );
 
+  // const { data } = useSWR(`/api/views/${post.slug}`, fetcher);
+  // const views = new Number(data?.total)
+
+  useEffect(() => {
+    const registerView = () =>
+      fetch(`/api/views/${post.slug}`, {
+        method: 'POST'
+      });
+
+    registerView();
+  }, [post.slug]);
   return (
     <>
       <Head>
