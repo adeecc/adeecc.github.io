@@ -9,11 +9,11 @@ tags: ['reinforcement learning', 'math']
 
 ## What even is Reinforcement Learning?
 
-The goal of Reinforcement Learning is simple: an 'agent' learns to maximise the 'rewards' it earns, by interacting with an 'environment'. Let's break down all these terms one by one. Imagine a game of tic-tac-toe with your mom. You start with an empty 3x3 grid. You begin by placing an `X` in an empty position, followed by your mom placing an `O` in another. This goes on until one of you owns a row, column or a major diagonal. Now imagine instad of your mom a computer plays against you. Can we make the computer play as good as you do? This is the problem reinforcement learning tries to solve: making a 'machine' learn to work in an environment and therafter maximise its performance.
+The goal of Reinforcement Learning is simple: an 'agent' learns to maximise the 'rewards' it earns, by interacting with an 'environment'. Let's break down all these terms one by one. Imagine a game of tic-tac-toe with your friend. You start with an empty 3x3 grid. You begin by placing an `X` in an empty position, followed by your friend placing an `O` in another. This goes on until one of you owns a row, column or a major diagonal. Now imagine instead of your friend a computer plays against you. Can we make the computer play as good as you do? This is the problem reinforcement learning tries to solve: making a 'machine' learn to work in an environment and thereafter maximise its performance.
 
 ## Defining some Terms
 
-The game you are playing is the **environment**. It has a fixed set of rules for how you interact with it and how a winner is decided. The board is like **state of the environment**, or just the **state**. Every action a player takes, occupies another cell in it, modifying the **state** at each turn. An **agent** is a player in the game, like you or your mother. It takes some actions that have some consequence and the game continues. These consequences are two fold: it modifies the **state of the environment** and may or may not lead to a **reward**. One of you winning the game, can be considered a **reward**. The sequence of steps, from the start of the game to the end is an **episode**.
+The game you are playing is the **environment**. It has a fixed set of rules for how you interact with it and how a winner is decided. The board is like **state of the environment**, or just the **state**. Every action a player takes, occupies another cell in it, modifying the **state** at each turn. An **agent** is a player in the game, like you or your friend. It takes some actions that have some consequence and the game continues. These consequences are two fold: it modifies the **state of the environment** and may or may not lead to a **reward**. One of you winning the game, can be considered a **reward**. The sequence of steps, from the start of the game to the end is an **episode**.
 
 ### Formal Definitions
 
@@ -34,7 +34,7 @@ $$
 
 ## The Markov Assumption and the Markov Decision Process
 
-This particular form of the transition function that we saw [earlier](#formal-definitions) is centered aorund the assumption that the next state and reward depend _only_ on the current state and action. This is known as the **Markov Assumption**. Loosely,
+This particular form of the transition function that we saw [earlier](#formal-definitions) is centered around the assumption that the next state and reward depend _only_ on the current state and action. This is known as the **Markov Assumption**. Loosely,
 
 $$
 P(S_{t+1} | S_1, S_2, ..., S_t) = P(S_{t+1} | S_t)
@@ -110,7 +110,7 @@ $$
 \pi(s) = a
 $$
 
-We can now recontextualize the definitions for state and action value functions to include the policy parameters as follows:
+We can now re-contextualize the definitions for state and action value functions to include the policy parameters as follows:
 
 $$
 v_{\pi}(s) = \mathbb{E}_{\pi}[G_t | S_t = s] \\
@@ -123,7 +123,7 @@ where the subscript just denotes that we are following the policy $\pi$ when doi
 
 If we don't use the generated value functions to determine which actions to take in a state, then what even was the point of generating them. Exactly with this thought we introduce greedy and $\epsilon$-greedy policies.
 
-A greedy policy is one, which at every state, chooses _only_ the action with the highest action-value estimate, i.e. it is a deterministic policy. Quantiatively, a greedy policy is defined as
+A greedy policy is one, which at every state, chooses _only_ the action with the highest action-value estimate, i.e. it is a deterministic policy. Quantitatively, a greedy policy is defined as
 
 $$
 \pi_{greedy} (s) = \argmax_a q(s, a)
@@ -139,7 +139,7 @@ $$
 \end{cases}
 $$
 
-> The choice of values for $\epsilon$ leads into the exporation-exploitation problem which is whole another can of worms.
+> The choice of values for $\epsilon$ leads into the exploration-exploitation problem which is whole another can of worms.
 
 ### Estimating this Goodness
 
@@ -169,9 +169,9 @@ $$
 $$
 
 > The last equation is derived by accounting for all the states, $s'$ that can occur and rewards $r$ we can gain after taking that action on taking that action $a$.
-> In essence, we compute the probability of both the variables: $s', r$ occuring and use them to weight the return generated by it.
+> In essence, we compute the probability of both the variables: $s', r$ occurring and use them to weight the return generated by it.
 
-The final equation we have derived is the **Bellman Equation** for $q_\pi$. It gives a quantiative relation between the current _action-values_ and the _subsequent_ _state-values_. We are _looking ahead_ from the current state, to the next (and by extension all future) state(s) to determine the current value estimates.
+The final equation we have derived is the **Bellman Equation** for $q_\pi$. It gives a quantitative relation between the current _action-values_ and the _subsequent_ _state-values_. We are _looking ahead_ from the current state, to the next (and by extension all future) state(s) to determine the current value estimates.
 
 This opens the door to various methods of _estimating_ the value functions, by varying how _**wide**_ or how _**deep**_ we choose to look.
 
@@ -179,7 +179,7 @@ This opens the door to various methods of _estimating_ the value functions, by v
 
 ### The "Holy Grail" of Policies
 
-The goal of reinforcement learning is to reach an _optimal_ policy. Loosely, an optimal policy is one that is able to generate a lot of reward over the long run. We denote an optmal policy as $\pi_*$
+The goal of reinforcement learning is to reach an _optimal_ policy. Loosely, an optimal policy is one that is able to generate a lot of reward over the long run. We denote an optimal policy as $\pi_*$
 
 > There may be more than one optimal policies, that achieve our goals.
 
@@ -217,9 +217,9 @@ $$
     q_*(s, a) = \sum_{s', r} p(s', r | s, a)(r + \gamma \max_{a'} q_* (s', a'))
 $$
 
-These are collectovely called the _Bellman Optimality Equations_.
+These are collectively called the _Bellman Optimality Equations_.
 
-If we had complete knowledge of the MDP, especially the transition function then we could solve the Bellman Optimality Equations to get an optimal policy for our agent. However, rarely are these information privy to us. We use these only to lay a thoeretical foundation for all the subsequent RL algorithms such as Dynamic Programming (DP), Monte-Carlo (MC) Methods or Temporal Difference (TD) Learning.
+If we had complete knowledge of the MDP, especially the transition function then we could solve the Bellman Optimality Equations to get an optimal policy for our agent. However, rarely are these information privy to us. We use these only to lay a theoretical foundation for all the subsequent RL algorithms such as Dynamic Programming (DP), Monte-Carlo (MC) Methods or Temporal Difference (TD) Learning.
 
 > In this post I look only at TD Learning and will casually ignore DP and MC Methods. Do not at me.
 
@@ -243,7 +243,7 @@ $$
 \end{align*}
 $$
 
-Temporal Difference Learning utilises the last equation with 2 variations:
+Temporal Difference Learning utilizes the last equation with 2 variations:
 
 - The exact value of $v_\pi(S_{t + 1})$ is not known, and is instead replaced by our current estimate, $V$.
 - The _expected value_ is not known, and we directly use the sampled value as an approximation of the expected value
@@ -334,3 +334,18 @@ Q-Learning, and subsequently Deep Q-Learning algorithms such as DQN ushered in a
 Overtime methods were introduced to skip the middle-man, i.e. the action-value estimates and learn the policy directly. These _policy gradient_ methods, although unstable to train can be combined with Q-Learning models to create _actor-critic_ models that can outperform almost any other reinforcement learning algorithm, and even surpass human level performance and more agents and algorithms being published every day. Hoping to see you at the forefront of it as well!
 
 I know this is a long read, but hopefully it was worth it. If you notice mistakes and errors in this post, don’t hesitate to contact me at [adeecc11 at gmail dot com]. See you in the next post! :)
+
+
+## References
+
+[1]: Sutton, R. S., &amp; Barto, A. G. (2018). [Reinforcement learning: An introduction. The MIT Press](http://incompleteideas.net//book/the-book.html). 
+
+[2]: Silver, D. (2015). [Course on Reinforcement Learning](https://www.davidsilver.uk/teaching/).
+
+[3]: Silver, D. (2015). [Lectures on Reinforcement Learning \[MOOC\]](https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ).
+
+[4]: Hasselt, H. V., Borsa D., &amp; Matteo Hessel (2021) [Reinforcement Learning Lecture Series 2021 \[MOOC\]](https://deepmind.com/learning-resources/reinforcement-learning-series-2021).
+
+[5]: Weng, L. (2018, February 19). [A (long) peek into reinforcement learning. Lil'Log](https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html). 
+
+[6]: Spinning Up by OpenAI (2018): [Part 1: Key Concepts in RL](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html)

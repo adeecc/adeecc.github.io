@@ -63,6 +63,23 @@ module.exports = {
     animation: {
       'slide-in': 'slidein 0.2s ease-out' 
     },
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            'blockquote': {
+              fontStyle: 'light',
+            },
+            'blockquote p:first-of-type::before': {
+              content: '',
+            },
+            'blockquote p:last-of-type::after': {
+              content: '',
+            },
+          }
+        }
+      })
+    }
   },
   plugins: [require('@tailwindcss/typography')]
 };
