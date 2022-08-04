@@ -1,9 +1,10 @@
-import { NumViewsDao } from 'lib/dbConnect';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+import { NumViewsDao } from 'lib/dbConnect';
+
+const pageNumViewQuery = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const slug = req.query.slug.toString();
+    const slug = req.query.slug!.toString();
 
     switch (req.method) {
       case 'POST': {
@@ -32,3 +33,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json({ exception: e });
   }
 };
+
+export default pageNumViewQuery;

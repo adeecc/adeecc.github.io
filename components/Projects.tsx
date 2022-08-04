@@ -14,7 +14,7 @@ const featuredProjects: Array<ProjectDeets> = [
   {
     _id: 1,
     title: 'B(CMS)',
-    desc: 'A minimal replacement for University Moodle Application',
+    desc: 'A minimal replacement for university Moodle application',
     img: '/images/bcms.png',
     stack: ['React', 'Express', 'Tailwind', 'TypeScript', 'Postgres'],
     link: 'https://github.com/adeecc/bcms-client',
@@ -22,11 +22,11 @@ const featuredProjects: Array<ProjectDeets> = [
   },
   {
     _id: 2,
-    title: 'Shiftr.io',
-    desc: 'Track Schedule, Meets and Inventory!',
+    title: 'Shiftrr',
+    desc: 'Freelancing platofrm for students of BITS',
     img: '/images/shiftrio.png',
-    stack: ['Django', 'Postgres', 'Redis', 'Azure Cloud', 'Heroku'],
-    link: 'https://github.com/adeecc/shiftr_api'
+    stack: ['React', 'Tailwind', 'TypeScript'],
+    link: 'https://github.com/adeecc/shiftrr-client'
   },
   {
     _id: 3,

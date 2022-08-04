@@ -23,8 +23,8 @@ const Home: NextPage = () => {
             </h4>
 
             <div className='text-primary-300 mt-8'>
-              Working with Natural Langage Processing, Reinforcement Learning
-              and dabbling with Web Development on occasion
+              Working with Representation Learning, Reinforcement Learning
+              and dabbling with Web Development on occasion.
             </div>
           </div>
           <div className='block relative col-span-1 row-span-1 sm:col-end-4'>

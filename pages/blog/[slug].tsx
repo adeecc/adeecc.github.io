@@ -2,8 +2,8 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import { allBlogs } from '.contentlayer/data';
-import type { Blog } from '.contentlayer/types';
+
+import { allBlogs, type Blog } from 'contentlayer/generated';
 
 import Container from 'components/Container';
 import components from 'components/MDXComponents';
@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const BlogPost: NextPage<{ post: Blog }> = ({ post }) => {
-  const Component = useMDXComponent(post.body.code);
+  const MDXContent = useMDXComponent(post.body.code);
   const publishedDate = useMemo(
     () =>
       new Date(post.published).toLocaleDateString('en-US', {
@@ -85,7 +85,7 @@ const BlogPost: NextPage<{ post: Blog }> = ({ post }) => {
         </div>
 
         <div className='prose prose-invert'>
-          <Component components={{ ...components } as any} />
+          <MDXContent components={{ ...components } as any} />
         </div>
       </Container>
     </>

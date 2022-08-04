@@ -8,7 +8,6 @@ import Footer from 'components/Footer';
 import { NavItem, SocialItem } from 'lib/types';
 
 const navigation: NavItem[] = [
-  { text: 'About', href: '/about' },
   { text: 'Blog', href: '/blog' },
   { text: 'Contact', href: '/contact' }
 ];

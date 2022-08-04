@@ -26,10 +26,23 @@ const events: Event[] = [
   },
   {
     id: 2,
-    time: 'May 2022 - Jun 2022',
+    time: 'May 2022 - Jul 2022',
     loc: 'Hyd, India',
     position: 'Summer Intern',
     org: 'D.E. Shaw',
+    details: [
+      'Monitoring framework for tracking changes on a data source', 
+      'Decentralized backend services in python, with MongoDB as central data store | React-Redux web application',
+      'Interactive selection and parsing of various HTML elements including tables, lists and grids',
+      'Alert rule framework for sanity check of parsed data',
+    ]
+  },
+  {
+    id: 3,
+    time: 'Aug 2022 - Jan 2022',
+    loc: 'Saarbrücken, Germany',
+    position: 'Visiting Scholar',
+    org: 'Max Planck Institute for Software Systems',
     details: ['Coming Soon!']
   }
 ];

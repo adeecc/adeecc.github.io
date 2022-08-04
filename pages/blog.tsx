@@ -3,8 +3,7 @@ import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import Head from 'next/head';
 import NextLink from 'next/link';
 
-import { allBlogs } from '.contentlayer/data';
-import type { Blog } from '.contentlayer/types';
+import { allBlogs, type Blog} from 'contentlayer/generated';
 
 import { pick } from 'lib/utils';
 import Container from 'components/Container';
