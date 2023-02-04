@@ -31,7 +31,7 @@ const events: Event[] = [
     position: 'Summer Intern',
     org: 'D.E. Shaw',
     details: [
-      'Monitoring framework for tracking changes on a data source', 
+      'Monitoring framework for tracking changes on a data source',
       'Decentralized backend services in python, with MongoDB as central data store | React-Redux web application',
       'Interactive selection and parsing of various HTML elements including tables, lists and grids',
       'Alert rule framework for sanity check of parsed data',
@@ -39,12 +39,25 @@ const events: Event[] = [
   },
   {
     id: 3,
-    time: 'Aug 2022 - Jan 2022',
+    time: 'Aug 2022 - Jan 2023',
     loc: 'Saarbrücken, Germany',
     position: 'Visiting Scholar',
     org: 'Max Planck Institute for Software Systems',
-    details: ['Coming Soon!']
+    details: [
+      'Implement contemporary papers including "Automatic Reward Design via Learning Motivation-Consistent Intrinsic Rewards"',
+      'Used PyTorch and iterated over Stable baselines 3 to create the sparse environments and the algorithms',
+      'Replicated and confirmed the results obtained by the original authors '
+    ]
+  },
+  {
+    id: 4,
+    time: 'Jan 2023 - Jun 2023',
+    loc: 'Bengaluru, India',
+    position: 'Intern, MTS',
+    org: 'Nutanix',
+    details: ['Coming soon...']
   }
+
 ];
 
 interface TimelineItemProps {
@@ -77,7 +90,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ index, event }) => {
   );
 };
 
-interface TimelineProps {}
+interface TimelineProps { }
 
 const Timeline: React.FC<TimelineProps> = (props: TimelineProps) => {
   return (
