@@ -17,11 +17,12 @@ const Footer: React.FC<FooterProps> = ({ navigation, socials }) => {
         {/* Nav */}
         <div className='col-span-1 flex flex-col gap-y-5 items-center md:items-start'>
           {navigation.map((value) => (
-            <NextLink key={value.href} href={value.href}>
-              <a className='text-primary-200 hover:text-primary-100'>
-                {value.text}
-              </a>
-            </NextLink>
+            (<NextLink
+              key={value.href}
+              href={value.href}
+              className='text-primary-200 hover:text-primary-100'>
+              {value.text}
+            </NextLink>)
           ))}
         </div>
         {/* Socials */}

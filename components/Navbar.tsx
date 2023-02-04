@@ -12,18 +12,17 @@ const NavItem: React.FC<NavItem> = ({ href, text }) => {
   const router = useRouter();
   const isActive = router.asPath == href;
   return (
-    <NextLink href={href} passHref>
-      <a
-        className={cn(
-          isActive
-            ? 'font-semibold text-accent-900'
-            : 'font-normal text-primary-200',
-          'sm:py-2 rounded-lg hover:text-accent-800 transition-all'
-        )}
-      >
-        {text}
-      </a>
-    </NextLink>
+    (<NextLink
+      href={href}
+      passHref
+      className={cn(
+        isActive
+          ? 'font-semibold text-accent-900'
+          : 'font-normal text-primary-200',
+        'sm:py-2 rounded-lg hover:text-accent-800 transition-all'
+      )}>
+      {text}
+    </NextLink>)
   );
 };
 
