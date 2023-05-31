@@ -1,18 +1,25 @@
-type ConvertUndefined<T> = OrUndefined<{
-  [K in keyof T as undefined extends T[K] ? K : never]-?: T[K];
-}>;
-type OrUndefined<T> = { [K in keyof T]: T[K] | undefined };
-type PickRequired<T> = {
-  [K in keyof T as undefined extends T[K] ? never : K]: T[K];
-};
-type ConvertPick<T> = ConvertUndefined<T> & PickRequired<T>;
+import { ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
-export const pick = <Obj, Keys extends keyof Obj>(
-  obj: Obj,
-  keys: Keys[]
-): ConvertPick<{ [K in Keys]: Obj[K] }> => {
-  return keys.reduce((acc, key) => {
-    acc[key] = obj[key];
-    return acc;
-  }, {} as any);
-};
+import { env } from "@/env.mjs"
+
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs))
+}
+
+export function formatDate(input: Date | string): string {
+  let date = input
+  if (typeof date === "string") {
+    date = new Date(input)
+  }
+
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  })
+}
+
+export function absoluteUrl(path: string) {
+  return `${env.NEXT_PUBLIC_APP_URL}${path}`
+}

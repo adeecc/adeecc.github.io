@@ -1,102 +1,49 @@
-import React from 'react';
+import React from "react"
+import { FeaturedProject } from "@/types"
 
-type ProjectDeets = {
-  _id: number;
-  title: string;
-  desc: string;
-  img: string;
-  stack: string[];
-  link: string;
-  ext?: string;
-};
+import { Icons } from "./icons"
 
-const featuredProjects: Array<ProjectDeets> = [
-  {
-    _id: 1,
-    title: 'B(CMS)',
-    desc: 'A minimal replacement for university Moodle application',
-    img: '/images/bcms.png',
-    stack: ['React', 'Express', 'Tailwind', 'TypeScript', 'Postgres'],
-    link: 'https://github.com/adeecc/bcms-client',
-    ext: 'https://bcms.netlify.app'
-  },
-  {
-    _id: 2,
-    title: 'Shiftrr',
-    desc: 'Freelancing platofrm for students of BITS',
-    img: '/images/shiftrio.png',
-    stack: ['React', 'Tailwind', 'TypeScript'],
-    link: 'https://github.com/adeecc/shiftrr-client'
-  },
-  {
-    _id: 3,
-    title: 'Meet Helper',
-    desc: 'Manage University wide Google Meet Class Links',
-    img: '/images/meethelp.png',
-    stack: ['Express', 'MongoDB', 'React', 'Heroku'],
-    link: 'https://github.com/adeecc/meet_helper'
-  }
-];
-
-interface FeaturedProjectProps {
-  projectDeets: ProjectDeets;
+interface ProjectCardProps {
+  projectDeets: FeaturedProject
 }
 
-const FeaturedProject: React.FC<FeaturedProjectProps> = ({ projectDeets }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ projectDeets }) => {
   return (
-    <div className='col-span-1'>
+    <div className="col-span-1">
       <a
         href={projectDeets.link}
-        className='flex flex-row-reverse md:flex-col gap-8 justify-between border-4 border-accent-800 rounded-lg p-4 h-full md:min-h-[14em] origin-center hover:scale-[1.05] transition-transform'
+        className="flex min-h-[12em] origin-center flex-col justify-between gap-8 rounded-lg border border-muted-foreground p-4 transition-transform hover:scale-[1.05] hover:border-2"
       >
-        <div className='text-sm'>{projectDeets.desc}</div>
-        <span className='md:text-2xl font-semibold'>{projectDeets.title}</span>
-      </a>
-    </div>
-  );
-};
-
-const Projects: React.FC = () => {
-  return (
-    <div className='flex flex-col gap-y-4'>
-      <div className='mt-10 grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch'>
-        {featuredProjects.map((fp) => (
-          <FeaturedProject key={fp._id} projectDeets={fp} />
-        ))}
-      </div>
-      <a
-        href='https://github.com/adeecc/'
-        className='text-primary-200 hover:text-primary-100 transition-colors flex items-center gap-x-1'
-      >
-        View all Projects
-        <span className=''>
-          <RightArrow className='h-4 w-4' />
+        <div className="text-sm">{projectDeets.desc}</div>
+        <span className="font-semibold text-accent md:text-2xl">
+          {projectDeets.title}
         </span>
       </a>
     </div>
-  );
-};
+  )
+}
 
-export default Projects;
+type ProjectsProps = {
+  featuredProjects: FeaturedProject[]
+}
 
-function RightArrow(props: JSX.IntrinsicElements['svg']) {
+export const Projects: React.FC<ProjectsProps> = ({ featuredProjects }) => {
   return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='h-7 w-7'
-      width='20'
-      height='20'
-      viewBox='0 0 24 24'
-      fill='none'
-      stroke='currentColor'
-      {...props}
-    >
-      <path
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        strokeWidth={2}
-        d='M14 5l7 7m0 0l-7 7m7-7H3'
-      />
-    </svg>
-  );
+    <div className="flex flex-col gap-y-4">
+      <div className="grid grid-cols-3 items-stretch gap-5">
+        {featuredProjects.map((fp) => (
+          <ProjectCard key={fp.id} projectDeets={fp} />
+        ))}
+      </div>
+      <a
+        href="https://github.com/adeecc/"
+        className="text-primary-200 hover:text-primary-100 flex items-center gap-x-1 transition-colors"
+      >
+        View all Projects
+        <span className="">
+          <Icons.arrowRight className="h-4 w-4" />
+        </span>
+      </a>
+    </div>
+  )
 }
