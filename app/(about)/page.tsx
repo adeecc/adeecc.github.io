@@ -3,7 +3,7 @@ import Image from "next/image"
 
 import { aboutConfig } from "@/config/about"
 import { Projects } from "@/components/projects"
-import { Timeline } from "@/components/Timeline"
+import { Timeline } from "@/components/timeline"
 
 const RootPage: React.FC = () => {
   return (
