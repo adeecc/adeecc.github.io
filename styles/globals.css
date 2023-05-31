@@ -1,306 +1,90 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-size: 16px;
+@layer base {
+  :root {
+    font-size: 16px;
 
-  --color-button-text: #fff;
-  --color-primary-100: #dee3ea;
-  --color-primary-200: #b2bdcd;
-  --color-primary-300: #5d7290;
-  --color-primary-600: #323d4d;
-  --color-primary-700: #242c37;
-  --color-primary-800: #151a21;
-  --color-primary-900: #0b0e11;
-  --color-secondary-washed-out: #879eed;
-  --color-secondary: #5575e7;
-  --color-accent-glow: rgba(253, 77, 77, 0.3);
-  --color-accent: #fd4d4d;
-  --color-accent-hover: #fd6868;
-  --color-accent-disabled: #f5bfbf;
-  --screen-height-reduction: 0px;
-  --color-primary-100-translucent: rgba(222, 227, 234, 0.15);
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
 
-  --color-gh-red: #ff7a73;
-  --color-gh-orange: #ffa657;
-  --color-gh-magenta: #d2a9fe;
-  --color-gh-blue: #79c0ff;
-  --color-gh-white: #c9d1d9;
-  --color-gh-green: #7ee787;
-  --color-gh-backround: #161a22;
-}
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-/* for firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-primary-700) rgba(0, 0, 0, 0);
-}
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
 
-/* for non-firefox */
-::-webkit-scrollbar {
-  overflow: overlay;
-  width: 8px;
-  /* shouldnt hardcode width, pls find way to make it dynamic, thin wasn't working for me...*/
-}
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
 
-::-webkit-scrollbar-track {
-  display: initial;
-}
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
 
-::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary-700);
-  border-radius: 5px;
-}
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
 
-html {
-  scroll-behavior: smooth;
-}
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-body,
-#__next {
-  background-color: var(--color-primary-900);
-  color: var(--color-primary-100);
-  box-sizing: border-box;
-}
+    --accent: 0 98% 65%;
+    --accent-foreground: 0 98% 65%;
 
-.prose .anchor {
-  @apply absolute invisible;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
 
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
-}
+    --ring: 215 20.2% 65.1%;
 
-.anchor:hover {
-  @apply visible no-underline;
-}
+    --radius: 0.5rem;
+  }
 
-.prose a {
-  @apply transition-all;
-}
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
 
-.prose .anchor:after {
-  @apply text-primary-300 dark:text-primary-700;
-  content: '#';
-}
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
 
-.prose *:hover > .anchor {
-  @apply visible no-underline;
-}
+    --accent: 0 98% 65%;
+    --accent-foreground: 0 73% 85%;
 
-.prose pre {
-  @apply border border-primary-200 bg-primary-100 dark:border-primary-700 dark:bg-primary-900;
-}
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
 
-.prose code {
-  @apply text-primary-800 dark:text-primary-200 px-1 py-0.5 border border-primary-100 dark:border-primary-800 rounded-lg bg-primary-100 dark:bg-primary-900;
-}
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
 
-.prose pre code {
-  @apply text-primary-800 dark:text-primary-200 p-0;
-  border: initial;
-}
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
 
-.prose img {
-  /* Don't apply styles to next/image */
-  @apply m-0;
-}
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
 
-.prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
-  margin-bottom: 1.25em !important;
-}
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
 
-/* Prism Code Color Schemes */
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
 
-code[class*='language-'],
-pre[class*='language-'] {
-  color: black;
-  background: none;
-  font-family: 'Roboto Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
-    monospace;
-  font-size: 1em;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
+    --ring: 216 34% 17%;
 
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-code[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection {
-  text-shadow: none;
-  background: rgba(1, 1, 1, 0.25);
-}
-
-pre[class*='language-']::selection,
-pre[class*='language-'] ::selection,
-code[class*='language-']::selection,
-code[class*='language-'] ::selection {
-  text-shadow: none;
-  background: #112334;
-}
-
-@media print {
-  code[class*='language-'],
-  pre[class*='language-'] {
-    text-shadow: none;
+    --radius: 0.5rem;
   }
 }
 
-/* Code blocks */
-pre[class*='language-'] {
-  padding: 1em;
-  margin: 0.5em 0;
-  overflow: auto;
-}
+@layer base {
+  /* for firefox */
+  * {
+    @apply border-border;
+  }
 
-:not(pre) > code[class*='language-'],
-pre[class*='language-'] {
-  /* background: #f5f2f0; */
-  background: var(--color-gh-backround);
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-/* Inline code */
-:not(pre) > code[class*='language-'] {
-  padding: 0.1em;
-  border-radius: 0.3em;
-  white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: slategray;
-}
-
-.token.punctuation {
-  color: #999;
-}
-
-.token.namespace {
-  opacity: 0.7;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  color: var(--color-gh-blue);
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color:var(--color-gh-blue);
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  color: var(--color-gh-red);
-  /* This background color was intended by the author of this theme. */
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  color: var(--color-gh-red);
-}
-
-.token.function,
-.token.class-name {
-  color: var(--color-gh-magenta);
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  color: var(--color-gh-orange);
-}
-
-.token.important,
-.token.bold {
-  font-weight: bold;
-}
-.token.italic {
-  font-style: italic;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-/* Rehype */
-
-.rehype-code-title {
-  @apply px-5 py-3 font-mono text-sm font-bold text-primary-800 bg-primary-200 border border-b-0 border-primary-200 rounded-t-lg dark:text-primary-200 dark:border-primary-700 dark:bg-primary-800;
-}
-
-.rehype-code-title + pre {
-  @apply mt-0 rounded-t-none;
-}
-
-.highlight-line {
-  @apply block px-4 -mx-4 bg-primary-100 border-l-4 border-accent-100 dark:bg-primary-800;
-}
-
-/* Remove Safari input shadow on mobile */
-input[type='text'],
-input[type='email'] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.metric-card > a {
-  @apply no-underline;
-}
-
-.metric-card > p {
-  @apply my-2;
-}
-
-.step > h3 {
-  @apply my-0;
-}
-
-.prose .tweet a {
-  text-decoration: inherit;
-  font-weight: inherit;
-}
-
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    box-sizing: border-box;
+  }
 }
