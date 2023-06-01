@@ -12,7 +12,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ projectDeets }) => {
     <div className="col-span-1">
       <a
         href={projectDeets.link}
-        className="flex min-h-[12em] origin-center flex-col justify-between gap-8 rounded-lg border border-muted-foreground p-4 transition-transform hover:scale-[1.05] hover:border-2"
+        className="flex h-full origin-center flex-col justify-between gap-8 rounded-lg border border-muted-foreground p-4 transition-transform hover:scale-[1.05] hover:border-2"
       >
         <div className="text-sm">{projectDeets.desc}</div>
         <span className="font-semibold text-accent md:text-2xl">
@@ -30,7 +30,7 @@ type ProjectsProps = {
 export const Projects: React.FC<ProjectsProps> = ({ featuredProjects }) => {
   return (
     <div className="flex flex-col gap-y-4">
-      <div className="grid grid-cols-3 items-stretch gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 items-stretch gap-5">
         {featuredProjects.map((fp) => (
           <ProjectCard key={fp.id} projectDeets={fp} />
         ))}
