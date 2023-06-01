@@ -11,6 +11,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 import { env } from "@/env.mjs"
+import { siteConfig } from "@/config/site"
 import { absoluteUrl, cn, formatDate } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
@@ -87,7 +88,7 @@ const PostPage = async ({ params }: PostPageProps) => {
   }
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10">
+    <article className="container relative py-6 lg:py-10">
       <Link
         href="/blog"
         className={cn(
@@ -99,44 +100,46 @@ const PostPage = async ({ params }: PostPageProps) => {
         See all posts
       </Link>
       <div>
-        {post.published && (
-          <time
-            dateTime={post.published}
-            className="block text-sm text-muted-foreground"
-          >
-            Published on {formatDate(post.published)}
-          </time>
-        )}
+        <div className="flex justify-between">
+          {post.published && (
+            <time
+              dateTime={post.published}
+              className="block text-sm text-muted-foreground"
+            >
+              Published on {formatDate(post.published)}
+            </time>
+          )}
+
+          {post.tags && (
+            <div className="flex gap-1 text-xs text-muted-foreground">
+              {post.tags.map((tag) => (
+                <span className="underline">{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
         <h1 className="my-2 inline-block font-heading text-4xl leading-tight lg:text-5xl">
           {post.title}
         </h1>
-        {/* {authors?.length ? (
-          <div className="mt-4 flex space-x-4">
-            {authors.map((author) =>
-              author ? (
-                <Link
-                  key={author._id}
-                  href={`https://twitter.com/${author.twitter}`}
-                  className="flex items-center space-x-2 text-sm"
-                >
-                  <Image
-                    src={author.avatar}
-                    alt={author.title}
-                    width={42}
-                    height={42}
-                    className="rounded-full bg-white"
-                  />
-                  <div className="flex-1 text-left leading-tight">
-                    <p className="font-medium">{author.title}</p>
-                    <p className="text-[12px] text-muted-foreground">
-                      @{author.twitter}
-                    </p>
-                  </div>
-                </Link>
-              ) : null
-            )}
-          </div>
-        ) : null} */}
+        <div className="flex flex-col justify-between sm:flex-row-reverse">
+          <div className="mt-4 flex space-x-4"></div>
+          <Link
+            href={siteConfig.links.twitter}
+            className="flex items-center space-x-2 text-sm"
+          >
+            <Image
+              src="https://avatars.githubusercontent.com/u/28647816"
+              alt="Aditya Chopra"
+              width={42}
+              height={42}
+              className="rounded-full bg-white"
+            />
+            <div className="flex-1 text-left leading-tight">
+              <p className="font-medium">Aditya Chopra</p>
+              <p className="text-[12px] text-muted-foreground">@adeecc11</p>
+            </div>
+          </Link>
+        </div>
       </div>
       {post.image && (
         <Image
@@ -148,7 +151,9 @@ const PostPage = async ({ params }: PostPageProps) => {
           priority
         />
       )}
-      <Mdx code={post.body.code} />
+      <section id="content" className="mt-12">
+        <Mdx code={post.body.code} />
+      </section>
       <hr className="mt-12" />
       <div className="flex justify-center py-6 lg:py-10">
         <Link href="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
